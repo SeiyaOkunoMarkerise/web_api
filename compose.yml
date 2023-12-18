@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:14.4-alpine
+    container_name: postgres-users
+    environment:
+      - POSTGRES_ROOT_PASSWORD=root
+      - POSTGRES_DATABASE=test_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - TZ=Asia/Tokyo
+    hostname: db.com
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  web:
+    build:
+      context: ./web
+    container_name: web-users
+    hostname: web
+    ports:
+      - 80:80
+    volumes:
+      - ./web/data:/var/www/data
+    depends_on:
+      - db
+
+volumes:
+  postgres_volume:
