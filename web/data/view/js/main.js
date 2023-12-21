@@ -4,9 +4,9 @@ $(function () {
     url: function(){
       return "../../api/menu/" + (this.id ? this.id : '');
     },
-    parse: function(response) {
-      return response.data;
-    },
+    // parse: function(response) {
+    //   return response.data;
+    // },
     defaults:{
       name: '何か',
     }

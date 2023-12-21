@@ -1,0 +1,17 @@
+curl 'http://localhost/api/menu/11'
+###
+curl -X PUT -H "Content-Type: application/json" -d '{"name": "アップデートしたたこやき3"}' http://localhost/api/menu/130
+###
+curl -X POST -H "Content-Type: application/json" -d '{"name": "たこやき"}' http://localhost/api/menu/
+###
+curl -X DELETE -H  "Content-Type: application/json"  http://localhost/api/menu/132
+###
+curl -X POST -H "Content-Type: application/json" -d '{"name": "三条河原町店", "area": "京都"}' http://localhost/api/shop/
+###
+curl -X GET -H "Content-Type: application/json" http://localhost/api/shop/
+###
+curl -X GET -H "Content-Type: application/json" http://localhost/api/menu/
+###
+curl -X PUT -H "Content-Type: application/json" -d '{"name": "大阪駅前店", "area": "大阪"}' http://localhost/api/shop/111
+###
+curl -X DELETE -H "Content-Type: appication/json" http://localhost/api/shop/2

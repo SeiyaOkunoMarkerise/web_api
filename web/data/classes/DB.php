@@ -16,11 +16,11 @@ class DB
   public $name;  //メンバー変数ともいう
 
   // メソッド: コンストラクタ(パラメータ id,nameをセット)
-  // public function __construct($id, $name)
-  // {
-  //   $this->id = $id;
-  //   $this->name = $name;
-  // }
+  public function __construct($id, $name)
+  {
+    $this->id = $id;
+    $this->name = $name;
+  }
 
   // メソッド: connect()(PDOで接続)
   public function connect()
@@ -48,6 +48,11 @@ class DB
     $this->stmt->bindValue(':id', $this->id);
     $this->stmt->bindValue(':name', $this->name);
   }
+
+  public function bindName()
+  {
+    $this->stmt->bindValue(':name', $this->name);
+  }
   // メソッド: execute()(クエリ実行)
   // $this->stmt->execute();
   public function execute()
@@ -57,17 +62,15 @@ class DB
 
   public function searchone($sql)
   {
-    // クエリ実行
-    // $this->stmt->query()
-    // 結果取得
-    // $result = ...$fetch()
-    // 結果を返す
-    // return $result;
     $this->stmt = $this->pdo->prepare($sql);
     $this->stmt->bindValue(':id', $this->id);
     $this->stmt->execute();
     $result = $this->stmt->fetch(PDO::FETCH_ASSOC);
-    return $result;
+    if ($result) {
+      return $result;
+    } else {
+      throw new Exception("検索IDは存在しません", 1);
+    }
     // mrc_debug_print($this->stmt);
   }
 
@@ -97,4 +100,18 @@ class DB
     $this->stmt->bindValue(':name', $this->name);
     $this->stmt->execute();
   }
+
+  public function fetchone()
+  {
+    $this->stmt->fetch(PDO::FETCH_ASSOC);
+  }
+
+  public function lastInsertId()
+  {
+    return $this->pdo->lastInsertId();
+  }
+  public function updateone() {
+
+  }
+
 }
